@@ -37,8 +37,7 @@ M.get_currently_playing = function(max_width, throttle)
   if utilities._wait(throttle, last_update) then
     return stored_playback
   end
-  -- fetch playback using spotify-tui
-  local success, pb, stderr = wez.run_child_process { "spt", "pb", "--format", "%a - %t" }
+  local success, pb, stderr = wez.run_child_process { "spotify_player", "playback", "--format", "{artists} - {track}" }
   if not success then
     wez.log_error(stderr)
     return ""
